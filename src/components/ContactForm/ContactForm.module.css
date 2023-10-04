@@ -1,0 +1,28 @@
+.form {
+  display: flex;
+  width: 400px;
+  padding: 10px;
+  gap: 20px;
+  flex-wrap: wrap;
+  border: 2px solid #fda117;
+}
+.input {
+  height: 25px;
+  padding: 4px;
+  width: 300px;
+  border-radius: 5px;
+}
+.label {
+  width: 400px;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  padding: 4px 5px;
+}
+.button {
+  height: 30px;
+  width: 100px;
+  padding: 4px;
+  font-weight: 500px;
+  background-color: #fda117;
+}

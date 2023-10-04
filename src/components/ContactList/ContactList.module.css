@@ -1,0 +1,20 @@
+.list {
+  padding: 0px;
+  border: 1px solid #fda117;
+  width: 422px;
+}
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+  padding: 10px;
+  border: 1px solid #fda117;
+}
+.button {
+  height: 30px;
+  width: 100px;
+  padding: 4px;
+  font-weight: 500px;
+  background-color: #fda117;
+}
