@@ -1,19 +1,41 @@
+import { nanoid } from '@reduxjs/toolkit';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { addContact, getphoneBooksValue } from 'redux/contactsSlice';
 import css from './ContactForm.module.css';
 
-export const ContactForm = ({ onSubmit }) => {
+export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
+  const dispatch = useDispatch();
+  const phoneBook = useSelector(getphoneBooksValue);
 
   const handleChange = ({ target: { value, name } }) => {
     if (name === 'name') setName(value);
     else setNumber(value);
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    onSubmit({ name, number });
+  const onSubmitAddContact = event => {
+    event.preventDefault();
+    const data = { name, number };
+    const newObj = { ...data, id: nanoid() };
+
+    if (isNameNew(phoneBook, newObj) !== undefined) {
+      toast.warning(`${newObj.name} is already in contacts`);
+      return;
+    }
+
+    dispatch(addContact(newObj));
+
     reset();
+  };
+
+  const isNameNew = (phoneBook, newObj) => {
+    return phoneBook.find(
+      ({ name }) => name.toLowerCase() === newObj.name.toLowerCase()
+    );
   };
 
   const reset = () => {
@@ -22,7 +44,7 @@ export const ContactForm = ({ onSubmit }) => {
   };
 
   return (
-    <form className={css.form} onSubmit={handleSubmit}>
+    <form className={css.form} onSubmit={onSubmitAddContact}>
       <label className={css.label}>
         Name
         <input

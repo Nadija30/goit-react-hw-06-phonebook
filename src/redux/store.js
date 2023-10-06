@@ -8,9 +8,14 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import { contactsPersistReducer } from './contactsSlice';
+import { filterSlice } from './filterSlise';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    phoneBook: contactsPersistReducer,
+    filters: filterSlice.reducer,
+  },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {

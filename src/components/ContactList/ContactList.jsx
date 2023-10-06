@@ -1,8 +1,25 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { delContact, getphoneBooksValue } from 'redux/contactsSlice';
+import { getFilter } from 'redux/filterSlise';
 import css from './ContactList.module.css';
-export const ContactList = ({ contacts, deleteContact }) => {
+
+export const ContactList = () => {
+  const dispatch = useDispatch();
+
+  const phoneBook = useSelector(getphoneBooksValue);
+
+  const filterPhoneBook = useSelector(getFilter);
+
+  const visibleContacts = phoneBook.filter(({ name }) =>
+    name.toLowerCase().includes(filterPhoneBook)
+  );
+
+  const deleteContact = contactId => {
+    dispatch(delContact(contactId));
+  };
   return (
     <ul className={css.list}>
-      {contacts.map(({ id, name, number }) => {
+      {visibleContacts.map(({ id, name, number }) => {
         return (
           <li className={css.item} key={id}>
             <span>{name}</span>
