@@ -9,12 +9,12 @@ import {
   REGISTER,
 } from 'redux-persist';
 import { contactsPersistReducer } from './contactsSlice';
-import { filterSlice } from './filterSlise';
+import { filtersReducer } from './filterSlise';
 
 export const store = configureStore({
   reducer: {
     phoneBook: contactsPersistReducer,
-    filters: filterSlice.reducer,
+    filters: filtersReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
